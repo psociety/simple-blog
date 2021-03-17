@@ -1,0 +1,12 @@
+{
+    "title": "Seger",
+    "description": "Optional",
+    "entries" : [
+        {
+            "slug": "viva-las-drojas",
+            "title": "Living in the gangsters paradise",
+            "preview": "This is a demo post to show you how to write blog posts with markdown. I strongly encourage you to take 5 minutes to learn how to write in markdown - it’ll teach you how to transform regular text into bold/italics/headings/tables/etc",
+            "date": "2021-03-16T20:28:26Z"
+        }
+    ]
+}
