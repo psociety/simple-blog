@@ -7,36 +7,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
         <title>Loading</title>
-        <style>
-            a {
-                text-decoration: none;
-                color: #404040;
-            }
-            a:focus, a:hover {
-                text-decoration: none;
-                color: #0085A1;
-            }
-            h1 {
-                font-weight: 800;
-                line-height: 1.1;
-            }
-            .post-meta {
-                color: #808080;
-                font-style: italic;
-            }
-            .social-share-section .bi-linkedin {
-                color: #fff;
-                background-color: #007bb6;
-            }
-            .social-share-section .bi-facebook {
-                color: #007bb6;
-                background-color: #fff;
-            }
-            .social-share-section .bi-twitter {
-                color: #fff;
-                background-color: #55acee;
-            }
-        </style>
+        <link href="css/seger.css" rel="stylesheet">
     </head>
     <body>
         <div class="container-fluid d-flex min-vh-100 flex-column p-0">
@@ -55,26 +26,26 @@
             <footer class="pl-5 pt-3">
                 <div class="row p-0 m-0">
                     <div class="col-12 text-center">
-                        Barcos y Frutas Multimedia, S.L
+                        Made with <a href="#" target="_blank">Seger</a>
                     </div>
                 </div>
             </footer>
         </div>
         <script type="text/template" id="tpl-home">
-            <div class="container">
+            <div class="container section-home">
                 <div class="row">
     		        <div class="col-12">
                     <% entries.forEach(entry => { %>
                         <article>
-                            <a href="<%= entry.url %>">
-                                <h2 class="post-title"><%= entry.title %></h2>
+                            <a href="<%= entry.url %>" class="post-title">
+                                <h2><%= entry.title %></h2>
                             </a>
                             <p class="post-meta">
                                 Posted on <%= seger.formatDate(entry.date) %>
                             </p>
                             <div class="post-entry">
                                 <%= entry.preview %>
-                                <a href="<%= entry.url %>" class="post-read-more"><strong>[Read More]</strong></a>
+                                <a href="<%= entry.url %>" class="post-read-more">Read More</a>
                             </div>
                         </article>
                     <% }) %>
@@ -86,10 +57,8 @@
             <div>
                 <header>
                     <div class="container-md">
-                        <div class="row">
-                            <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
-                                <h1><%= entry.title %></h1>
-                            </div>
+                        <div class="row text-center mt-3">
+                            <h1><%= entry.title %></h1>
                         </div>
                     </div>
                 </header>
@@ -97,186 +66,42 @@
                     <article>
                     <%= entry.html %>
                     </article>
+                    <div class="row">
+                        <div class="col-6">
+                        <% if (relatedPosts.previous) { %>
+                            <a href="<%= relatedPosts.previous.url %>" class="btn btn-link bi bi-arrow-left"> Previous entry: <%= relatedPosts.previous.title %></a>
+                        <% } %>
+                        </div>
+                        <div class="col-6">
+                        <% if (relatedPosts.next) { %>
+                            <a href="<%= relatedPosts.next.url %>" class="float-end btn btn-link bi bi-arrow-right"> Next entry: <%= relatedPosts.next.title %></a>
+                        <% } %>
+                        </div>
+                    </div>
+                    <section class="social-share-section text-center">
+                        <a href="https://twitter.com/intent/tweet?text=<%= encodeURIComponent(entry.title) %>&amp;url=<%= encodeURIComponent(location.href) %>" class="btn bi-twitter" title="Share on Twitter" target="_blank"></a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encodeURIComponent(location.href) %>" class="btn bi-facebook" title="Share on Facebook" target="_blank"></a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=<%= encodeURIComponent(location.href) %>" class="btn bi-linkedin" title="Share on LinkedIn" target="_blank"></a>
+                        <a href="whatsapp://send?text=<%= encodeURIComponent(location.href) %>" data-action="share/whatsapp/share" class="btn bi-whatsapp" title="Share on Whatsapp" target="_blank"></a>
+                        <a href="https://telegram.me/share/url?url=<%= encodeURIComponent(location.href) %>&text=<%= encodeURIComponent(location.title) %>" class="btn bi-telegram" title="Share on Telegram" target="_blank"></a>
+                        <a href="mailto:?subject=<%= encodeURIComponent("look at this blog") %>&amp;body=<%= encodeURIComponent(location.href) %>" class="btn bi-envelope" title="Share on Email" target="_blank"></a>
+                    </section>
                 </div>
-                <section class="social-share-section">
-                    <span>Share: </span>
-                    <a href="https://twitter.com/intent/tweet?text=<%= encodeURIComponent(entry.title) %>&amp;url=<%= encodeURIComponent(location.href) %>" class="btn" title="Share on Twitter">
-                      <span class="bi bi-twitter" aria-hidden="true"></span>
-                    </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encodeURIComponent(location.href) %>" class="btn" title="Share on Facebook">
-                      <span class="bi bi-facebook" aria-hidden="true"></span>
-                    </a>
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=<%= encodeURIComponent(location.href) %>" class="btn" title="Share on LinkedIn">
-                      <span class="bi bi-linkedin" aria-hidden="true"></span>
-                    </a>
-                </section>
+            </div>
+        </script>
+        <script type="text/template" id="tpl-404">
+            <div class="container-md text-center align-middle">
+                <div class="row">
+                    <h2>404 - Page not found</h2>
+                    <p>The requested page could not be found.</p>
+                    <p><a href="?/">Head to homepage</a></p>
+                </div>
             </div>
         </script>
         <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
+        <script src="js/seger.js"></script>
         <script>
-            class Seger {
-                
-                constructor() {
-                    this.mainContainer = document.getElementById('main-container');
-
-                    this.getConfig().then(() => {
-                        this.setup();
-                        
-                        this.goTo(this.getCurrentRoute());
-                    });
-                }
-                
-                setup () {
-                    document.querySelector('.navbar-brand').innerText = this.config.title;
-                    
-                    this.setupListeners();
-                }
-                
-                goTo (route) {
-                    const splitted = route.split("/");
-
-                    if (route.length === 0) {
-                        return this.showHome();
-                    } else if (splitted[0] === 'post') {
-                        const slug = splitted[1];
-                        return this.showPost(slug);
-                    } else if (splitted[0] === 'blog-editor') {
-                        
-                    }
-                }
-                
-                getLanguage = () => {
-                    return navigator.userLanguage || (navigator.languages && navigator.languages.length && navigator.languages[0]) || navigator.language || navigator.browserLanguage || navigator.systemLanguage || 'en';
-                }
-                
-                formatDate(date) {
-                    return (new Date(date)).toLocaleString(this.getLanguage(), {
-                        weekday: 'long', 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric'});
-                }
-                
-                getCurrentRoute () {
-                    return this.getRoute(location.search);
-                }
-                
-                getRoute (queryString) {
-                    if (queryString.length === 0) {
-                        return "";
-                    }
-                    const route = (new URLSearchParams(queryString)).entries().next().value;
-                    
-                    if (!route[0].startsWith("/") || route[1].length > 0) {
-                        return "";
-                    }
-
-                    return route[0].substr(1);
-                }
-                
-                setupListeners () {
-                    document.addEventListener("click", (e) => {
-                        const a = e.target.closest("a");
-                        
-                        // not clicking a local link
-                        if (a == null || !a.href.startsWith(location.origin + location.pathname)) {
-                            return;
-                        }
-                        // avoid redirecting but change the url
-                        e.preventDefault();
-                        history.pushState({}, '', a.href);
-                        
-                        const route = this.getRoute(new URL(a.href).search);
-                        
-                        this.goTo(route);
-                    });
-
-                    // detect when user goes back/forward through navigation history
-                    window.addEventListener("popstate", (e) => {
-                        this.goTo(this.getCurrentRoute());
-                    });
-                }
-                
-                getTemplate(name) {
-                    return document.getElementById("tpl-" + name).innerHTML.trim();
-                }
-
-                parseTemplate(name, data) {
-                    let parsedTemplate = _.template(this.getTemplate(name))(data);
-                    let div = document.createElement('div');
-                    div.innerHTML = parsedTemplate;
-                    
-                    return div.firstChild; 
-                }
-                
-                getEntry (slug) {
-                    return new Promise((resolve, reject) => {
-                        this.config.entries.forEach(entry => {
-                            if (entry.slug === slug) {
-                                resolve(entry);
-                            }
-                        });
-                    });
-                }
-                
-                getFullEntry (slug) {
-                    return new Promise((resolve, reject) => {
-                        this.getEntry(slug).then((entry) => {
-                            if (typeof entry.html !== 'undefined') {
-                                resolve(entry);
-                                return;
-                            }
-                            fetch('posts/' + slug + "/index.html")
-                                .then(response => response.text())
-                                .then(html => {
-                                    html = html.replace(/src="((?!http).+)"/, 'src="posts/' + slug + '/$1"');
-                                    return html;
-                                })
-                                .then(html => {
-                                    entry.html = html;
-                                    resolve(entry);
-                                });
-                        });
-                    });
-                }
-
-                getConfig () {
-                    return fetch('config.json')
-                      .then(response => response.json())
-                      .then(config => {
-                          this.config = config;
-                          
-                          this.config.entries.forEach(entry => {
-                              entry.url = "?/post/" + entry.slug;
-                          });
-                      });
-                }
-                
-                setTitle (title) {
-                    document.title = title + " - " + this.config.title;
-                }
-                
-                showPost (slug) {
-                    this.getFullEntry(slug).then((entry) => {
-                        this.setTitle(entry.title);
-                        this.render(this.parseTemplate("post", {entry}));
-                    });
-                }
-                
-                showHome () {
-                    this.setTitle("Home");
-                    this.render(this.parseTemplate("home", {
-                        entries: this.config.entries
-                    }));
-                }
-                
-                render (html) {
-                    this.mainContainer.innerHTML = '';
-                    this.mainContainer.appendChild(html);
-                }
-            }
             window.seger = new Seger();
-            
         </script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     </body>
