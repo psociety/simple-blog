@@ -168,3 +168,4 @@ class BlogEditor {
         document.getElementById('output').classList.remove("d-none");
     }
 }
+window.blogEditor = new BlogEditor();
